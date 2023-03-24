@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Астарес{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <a href="/" class="logo">
+            <img class="logo" src=" {% static "img/V6xnEvTgh0M.jpg" %}" alt="Астарес">
+        </a>
+        <div class="cart">
+            {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+           <button><a  href="{% url 'cart:cart_detail' %}">
+             <img src="{% static "img/cart-icon.png" %}"  alt="Корзинка"  width="300" height="100">
+            {{ total_items }} шт ,{{ cart.get_total_price }} Руб
+            </a>
+                </button>
+            {% else %}
+                <button> <a  href="{% url 'cart:cart_detail' %}">
+             <img src="{% static "img/cart-icon.png" %}"  alt="Корзинка"  width="300" height="100">
+            Корзина пуста.
+                    </a>
+                </button>
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <div id="subheader">
+
+    </div>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
