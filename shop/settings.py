@@ -11,11 +11,15 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os.path
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
+
+env = environ.Env()
+environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 
 
 CART_SESSION_ID = 'cart'
@@ -23,13 +27,14 @@ CART_SESSION_ID = 'cart'
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p&ebje1-fded0y+xr095v9qt%ozvv+h!5a3@sg&*i!iib6%pvo'
+# SECRET_KEY = 'django-insecure-p&ebje1-fded0y+xr095v9qt%ozvv+h!5a3@sg&*i!iib6%pvo'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['192.168.0.118','192.168.0.120', 'backend.local', '127.0.0.1']
-
+# DEBUG = True
+DEBUG = int(os.environ.get("DEBUG", default=0))
+# ALLOWED_HOSTS = ['192.168.0.118','192.168.0.120', 'backend.local', '127.0.0.1']
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -80,14 +85,25 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'Astares',
+#         'USER': 'postgres',
+#         'PASSWORD': 'B52b42b15)',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432'
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Astares',
-        'USER': 'postgres',
-        'PASSWORD': 'B52b42b15)',
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
+        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+        'PORT': os.environ.get('POSTGRES_PORT', 5432),
+        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'NAME': os.environ.get('POSTGRES_DB', "Astares")
     }
 }
 

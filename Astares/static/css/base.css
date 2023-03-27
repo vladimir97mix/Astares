@@ -20,7 +20,6 @@ img.logo {width: 50%;
     }
 
 body {
-    margin:0;
     padding:0;
     font-family:helvetica, sans-serif;
     max-width: 1500px;
@@ -29,11 +28,12 @@ body {
 
 h1, h2, h3, h4, h5 , h6 {
     font-family: 'Ubuntu', sans-serif; font-weight:normal;
+    color: #ececec;
 }
 
 a {
     text-decoration:none;
-    color: #2b2b2c;
+    color: #fad0bf;
 }
 
 a:hover {
@@ -42,7 +42,7 @@ a:hover {
 
 a.button, input[type="submit"] {
     color:#fff;
-    background:#5993bb;
+    background: #888686;
     border-radius:4px;
     padding:10px 20px;
     font-size:14px;
@@ -84,7 +84,7 @@ tbody tr.subtotal {
 }
 
 thead th, tbody tr.total {
-    background:#5993bb;
+    background: #888686;
     color:#fff;
     font-weight:bold;
 }
@@ -186,6 +186,7 @@ div.cart {
     margin:0;
     list-style:none;
     padding:10px 14px;
+    color: #ececec;
 }
 
 #sidebar ul li a {
@@ -227,7 +228,7 @@ div.cart {
 }
 
 .product-detail .price {
-    color:#333;
+    color: #bba659;
     font-size:28px;
     font-weight:bold;
 }
